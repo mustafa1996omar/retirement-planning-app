@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers, getExpenses, getIncomeSavings, getWithdrawalStrategy, getSocialSecurity, getRetirementAccounts } from './api';
+import { getAccounts, getExpenses, getIncomeSavings, getWithdrawalStrategy, getSocialSecurity, getRetirementAccounts } from './api';
 import { Typography, Button } from '@mui/material';
 import Tables from './Tables';
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [withdrawalStrategy, setWithdrawalStrategy] = useState([]);
   const [SocialSecurity, setSocialSecurity] = useState([]);
   const [retirementAccounts, setRetirementAccounts] = useState([]);
   const [incomeSavings, setIncomeSavings] = useState([]);
-  const [activeTable, setActiveTable] = useState('users');
+  const [activeTable, setActiveTable] = useState('accounts');
 
 
 
   useEffect(() => {
-    if (activeTable === 'users') {
-      getUsers()
+    if (activeTable === 'accounts') {
+      getAccounts()
         .then((response) => {
-          setUsers(response.data);
+          setAccounts(response.data);
         })
         .catch((error) => console.error(error));
     } else if (activeTable === 'expenses') {
@@ -64,8 +64,8 @@ function App() {
         Retirement Planning App
       </Typography>
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
-        <Button variant={activeTable === 'users' ? 'contained' : 'outlined'} onClick={() => handleTableChange('users')}>
-          Users
+        <Button variant={activeTable === 'accounts' ? 'contained' : 'outlined'} onClick={() => handleTableChange('users')}>
+          Accounts
         </Button>
         <Button variant={activeTable === 'expenses' ? 'contained' : 'outlined'} onClick={() => handleTableChange('expenses')}>
           Expenses
@@ -83,7 +83,7 @@ function App() {
           Retirement Accounts
         </Button>
       </div>
-      {activeTable === 'users' && <Tables data={users} />}
+      {activeTable === 'users' && <Tables data={accounts} />}
       {activeTable === 'expenses' && <Tables data={expenses} />}
       {activeTable === 'incomeSavings' && <Tables data={incomeSavings} />}
       {activeTable === 'withdrawalStrategy' && <Tables data={withdrawalStrategy} />}

@@ -32,3 +32,19 @@ export const getRetirementAccounts = () => {
     let response = axios.get(`${API_BASE_URL}/retirementAccounts`);
     return response;
 };
+
+export const registerUser = (userData) => {
+    let response = axios.post(`${API_BASE_URL}/register`, userData);
+    return response;
+};
+
+export const loginUser = (userData) => {
+    console.log(userData);
+    let response = axios.post(`${API_BASE_URL}/login`, userData);
+    return response;
+};
+
+export const logoutUser = () => {
+    let response = axios.get(`${API_BASE_URL}/logout`);
+    return response;
+};
